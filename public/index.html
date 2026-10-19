@@ -1,73 +1,142 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="purple">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OSINT Live Stream Monitor</title>
+  <title>OSINTOWNER // Command Center</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background-grid"></div>
-  <div class="ambient-glow"></div>
+  <div class="stars-layer"></div>
+  <div class="cyber-sun-wrapper">
+    <div class="cyber-sun">
+      <div class="sun-bars"></div>
+    </div>
+  </div>
+  <div class="synth-grid"></div>
+  <div class="scanlines"></div>
 
   <header class="navbar">
     <div class="brand">
-      <div class="status-pulse"></div>
-      <span class="logo-title">OSINT<span class="highlight">.STREAM</span></span>
-      <span class="badge">LIVE HYBRID</span>
+      <div class="brand-sun-icon">
+        <svg viewBox="0 0 24 24" fill="none" class="sun-svg">
+          <circle cx="12" cy="12" r="5" fill="currentColor"/>
+          <line x1="12" y1="1" x2="12" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="12" y1="20" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="1" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="20" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="logo-title">OSINT<span class="highlight">OWNER</span></span>
+        <span class="tagline">AUTONOMOUS C2 & SURVEILLANCE</span>
+      </div>
+      <div class="status-indicator">
+        <span class="pulse-dot"></span>
+        <span class="status-text">LIVE SYNC</span>
+      </div>
     </div>
 
     <div class="nav-controls">
+      <!-- Sun Shape Theme Switcher Button -->
+      <button id="themeToggleBtn" class="sun-theme-toggle" title="Tema Değiştir (Mor / Kırmızı Güneş)">
+        <div class="sun-core"></div>
+        <div class="sun-rays"></div>
+      </button>
+
       <div class="key-input-wrapper">
-        <input type="password" id="authKeyInput" placeholder="API Key girin (Varsayılan: osint1337)" value="osint1337">
+        <div class="input-icon">🔑</div>
+        <input type="password" id="authKeyInput" placeholder="API Key (osint1337)" value="osint1337">
         <button id="saveKeyBtn" class="btn btn-secondary">Bağlan</button>
       </div>
-      <button id="refreshBtn" class="btn btn-primary">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        Yenile
+
+      <button id="refreshBtn" class="btn btn-action">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        <span>YENİLE</span>
       </button>
+
       <div class="auto-refresh-toggle">
         <label class="switch">
           <input type="checkbox" id="autoRefreshCheckbox" checked>
           <span class="slider"></span>
         </label>
-        <span>Oto (3s)</span>
+        <span class="toggle-label">CANLI AKIŞ</span>
       </div>
     </div>
   </header>
 
   <main class="container">
     <section class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-label">Toplam Yakalanan Log</span>
+      <div class="stat-card" data-tilt>
+        <div class="stat-corner tl"></div>
+        <div class="stat-corner br"></div>
+        <div class="stat-header">
+          <span class="stat-label">TOPLAM YAKALANAN VERİ</span>
+          <span class="stat-icon">📊</span>
+        </div>
         <div class="stat-value" id="totalLogsCount">0</div>
+        <div class="stat-sub">Paket akışı devam ediyor</div>
       </div>
-      <div class="stat-card">
-        <span class="stat-label">Aktif Hedefler / Oyuncular</span>
-        <div class="stat-value" id="activePlayersCount">0</div>
+
+      <div class="stat-card" data-tilt>
+        <div class="stat-corner tl"></div>
+        <div class="stat-corner br"></div>
+        <div class="stat-header">
+          <span class="stat-label">HEDEF OYUNCULAR</span>
+          <span class="stat-icon">🎯</span>
+        </div>
+        <div class="stat-value text-accent" id="activePlayersCount">0</div>
+        <div class="stat-sub">Benzersiz tespit edilen profil</div>
       </div>
-      <div class="stat-card">
-        <span class="stat-label">Son Koordinat İletimi</span>
-        <div class="stat-value" id="lastCoordTime">-</div>
+
+      <div class="stat-card" data-tilt>
+        <div class="stat-corner tl"></div>
+        <div class="stat-corner br"></div>
+        <div class="stat-header">
+          <span class="stat-label">SON /HOME KOORDİNATI</span>
+          <span class="stat-icon">📍</span>
+        </div>
+        <div class="stat-value text-gold" id="lastCoordTime">-</div>
+        <div class="stat-sub" id="lastCoordCoords">GPS Takipçisi Beklemede</div>
       </div>
-      <div class="stat-card">
-        <span class="stat-label">Discord Entegrasyonu</span>
-        <div class="stat-value text-success" id="discordStatus">AKTİF</div>
+
+      <div class="stat-card" data-tilt>
+        <div class="stat-corner tl"></div>
+        <div class="stat-corner br"></div>
+        <div class="stat-header">
+          <span class="stat-label">DISCORD KÖPRÜSÜ</span>
+          <span class="stat-icon">⚡</span>
+        </div>
+        <div class="stat-value text-active" id="discordStatus">ONLINE</div>
+        <div class="stat-sub">Otomatik Discord İletimi</div>
       </div>
     </section>
 
     <section class="panel">
+      <div class="panel-glow-line"></div>
       <div class="panel-header">
         <div class="filter-group">
-          <button class="filter-btn active" data-filter="all">Tümü</button>
-          <button class="filter-btn" data-filter="coordinate">📍 Koordinatlar</button>
-          <button class="filter-btn" data-filter="chat">💬 Sohbet / Komut</button>
+          <button class="filter-btn active" data-filter="all">
+            <span class="btn-dot"></span> TÜMÜ
+          </button>
+          <button class="filter-btn" data-filter="coordinate">
+            <span class="btn-dot"></span> 📍 KOORDİNATLAR
+          </button>
+          <button class="filter-btn" data-filter="chat">
+            <span class="btn-dot"></span> 💬 SOHBET & KOMUTLAR
+          </button>
         </div>
+
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Oyuncu veya mesaj ara...">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="searchInput" placeholder="Oyuncu adı, koordinat veya mesaj filtrele...">
         </div>
       </div>
 
@@ -75,16 +144,21 @@
         <table class="log-table">
           <thead>
             <tr>
-              <th style="width: 130px;">ZAMAN</th>
-              <th style="width: 140px;">HEDEF</th>
-              <th style="width: 110px;">TİP</th>
-              <th>İÇERİK</th>
-              <th style="width: 90px; text-align: right;">İŞLEM</th>
+              <th style="width: 120px;">ZAMAN DAMGASI</th>
+              <th style="width: 170px;">HEDEF OYUNCU</th>
+              <th style="width: 130px;">TÜR</th>
+              <th>YAKALANAN İÇERİK</th>
+              <th style="width: 110px; text-align: right;">EYLEM</th>
             </tr>
           </thead>
           <tbody id="logsTableBody">
             <tr class="empty-row">
-              <td colspan="5">Veriler taranıyor veya henüz log bulunamadı...</td>
+              <td colspan="5">
+                <div class="radar-scan-box">
+                  <div class="radar-sweep"></div>
+                  <span>Sinyal bekleniyor... Minecraft sunucusundan veri akışı bekleniyor.</span>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
