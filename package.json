@@ -1,0 +1,13 @@
+{
+  "name": "osint-discord-vercel-logger",
+  "version": "1.0.0",
+  "description": "Hybrid Vercel Logger & Discord Forwarder with Realtime Dashboard",
+  "main": "api/log.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.x"
+  }
+}
